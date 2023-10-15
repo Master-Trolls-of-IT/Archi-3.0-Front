@@ -1,57 +1,130 @@
 body {
-  background-color: #333;
-  color: #fff;
+  background-color: #1f1f2e;
+  color: #ffffff;
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #2d2e3e;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 table {
   border-collapse: collapse;
-  width: 80%;
-  margin: 20px auto;
+  width: 100%;
+  background-color: #292a3a;
+  border: 2px solid #2d2e3e;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 th, td {
-  border: 1px solid #555;
-  padding: 8px;
+  border: 1px solid #2d2e3e;
+  padding: 10px;
   text-align: center;
 }
 
 th {
-  background-color: #444;
+  background-color: #242533;
+  border-radius: 10px 10px 0 0;
 }
 
 tr:nth-child(even) {
-  background-color: #666;
+  background-color: #2d2e3e;
 }
 
 tr:nth-child(odd) {
-  background-color: #555;
-}
-
-.active {
-  color: #00ff00;
+  background-color: #292a3a;
 }
 
 .title {
-  margin-left: 15px;
-}
-
-.inactive {
-  color: #ff0000;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #70a1ff; /* Bleu */
 }
 
 .button {
-  background-color: #ffffff;
+  background-color: #6c5ce7; /* Violet */
+  border: none;
+  color: #ffffff;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+.input-container label {
+  color: #70a1ff; /* Bleu */
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
 }
 
 .input {
-  background-color: #555555;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  padding: 8px;
+  border: 1px solid #555555;
+  border-radius: 5px;
+  background-color: #2d2e3e;
   color: #ffffff;
+}
+
+.create-button-container {
+  text-align: right;
+}
+
+.create-button-container .button {
+  margin-top: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.button-group .button {
+  flex: 1;
+  margin: 0 5px;
+}
+
+.button-group .button:first-child {
+  background-color: #555555;
 }
 
 .create-input {
   margin-top: 5px;
   margin-bottom: 5px;
+  max-width: 200px; /* Réduire la largeur de la zone d'ajout */
+}
+
+.create-button-container {
+  text-align: right;
+  margin-top: 10px; /* Ajout d'une marge supplémentaire en haut */
+}
+
+.create-button-container .button {
+  margin-left: 10px; /* Ajout d'un espace entre les boutons */
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end; /* Aligner les boutons à droite */
+  margin-top: 10px;
+}
+
+.button-group .button {
+  margin: 0 5px;
 }

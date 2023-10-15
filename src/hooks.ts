@@ -1,16 +1,10 @@
 import {useState} from "react";
 import useEffectOnce from "./utils/use-effect-once";
 import useServicesData from "./services/get-users";
+import {user} from "./user/user";
 
 const useAppData = () => {
-    const [users, setUsers] = useState([
-        {
-            id: 1,
-            username: 'Utilisateur1',
-            lastname: 'Nom1',
-            firstname: 'Prénom1',
-            age: '30'
-        }
+    const [users, setUsers] = useState<user[]>([
     ]);
 
     const { createUser, getUsers, updateUser, deleteUser } = useServicesData(setUsers);

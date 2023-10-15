@@ -4,7 +4,7 @@ import {user} from "../user/user";
 import Amplify, { Auth } from 'aws-amplify';
 
 const useServicesData = (setUsers: Dispatch<SetStateAction<user[]>>): any => {
-    const baseURL = ' https://zvqvejqbld.execute-api.eu-west-3.amazonaws.com/GaiaAlpha/'
+    const baseURL = 'https://zvqvejqbld.execute-api.eu-west-3.amazonaws.com/GaiaAlpha/'
     const baseHeaders = {
         'Content-Type': 'application/json'
     };
@@ -16,43 +16,56 @@ const useServicesData = (setUsers: Dispatch<SetStateAction<user[]>>): any => {
     }
 
     const getUsers = async () => {
-        const authToken = await getAuthToken(); // Obtenez le jeton d'authentification
+        const authToken = await getAuthToken();
         try {
             const res = await axios.get(baseURL, { ...baseConfig, headers: { ...baseHeaders, Authorization: authToken } });
-            const users = res.data;
+            const users = res.data.body.users;
             console.log(res.data);
-            setUsers(users);
+            setUsers(users ?? []);
         } catch (error) {
             console.error(error);
         }
     }
 
-    const createUser = (newUser: any) => {
+    const createUser = async (newUser: any) => {
+        const authToken = await getAuthToken();
         newUser.age = Number(newUser.age);
+        try {
+            const res = await axios.post(baseURL, newUser, { ...baseConfig, headers: { ...baseHeaders, Authorization: authToken } });
+            const users = res.data.body.users;
+            console.log(res.data);
+            setUsers(users ?? []);
+        } catch (error) {
+            console.error(error);
+        }
 
-        axios.post(baseURL, newUser, baseConfig)
-            .then(res => {
-                const data = res.data;
-                setUsers(data.users);
-            })
     }
 
-    const updateUser = (newUser: any) => {
+    const updateUser = async (newUser: any) => {
+        const authToken = await getAuthToken();
         newUser.age = Number(newUser.age);
-
-        axios.post(baseURL , newUser, baseConfig)
-            .then(res => {
-                const data = res.data;
-                setUsers(data.users);
-            })
+        try {
+            const res = await axios.patch(baseURL, newUser, { ...baseConfig, headers: { ...baseHeaders, Authorization: authToken } });
+            const users = res.data.body.users;
+            console.log(res.data);
+            setUsers(users ?? []);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    const deleteUser = (userId: any) => {
-        axios.delete(baseURL + userId )
-            .then(res => {
-                const data = res.data;
-                setUsers(data.users);
-            })
+    const deleteUser = async (userId: any) => {
+        const authToken = await getAuthToken();
+        try {
+            const res = await axios.delete(baseURL + 'users/' + userId, { ...baseConfig, headers: { ...baseHeaders, Authorization: authToken } });
+            console.log(res)
+            const users = res.data.body.users;
+            console.log(res.data);
+            setUsers(users ?? []);
+        } catch (error) {
+            console.error(error);
+            await getUsers()
+        }
     }
 
     return { deleteUser, createUser, getUsers, updateUser };
