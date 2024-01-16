@@ -1,12 +1,8 @@
 import { Amplify } from 'aws-amplify';
 
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
 import './App.css'
-import awsExports from './aws-exports';
 import React from 'react';
 import useAppData from "./hooks";
-Amplify.configure(awsExports);
 
 function App({ isPassedToWithAuthenticator, signOut, connectedUser }: any) {
   const { users, handleDeleteUser, handleCreateUser, handleSaveUser, handleEditUser, editingUser, newUser, setNewUser, handleEditUserChange } = useAppData();
@@ -116,7 +112,7 @@ function App({ isPassedToWithAuthenticator, signOut, connectedUser }: any) {
   );
 }
 
-export default withAuthenticator(App);
+export default App;
 
 export async function getStaticProps() {
     return {
